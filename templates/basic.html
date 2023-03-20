@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Counter</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: grey;
+    }
+    .myChart {
+      position: absolute;
+      top: 25%;
+      left: 12%;
+    }
+
+    .myChart1 {
+      position: absolute;
+      top: 5%;
+      right: 37%;
+    }
+
+    .myChart2 {
+      position: absolute;
+      top: 5%;
+      right: 20%;
+    }
+
+    .myChart3 {
+      position: absolute;
+      top: 5%;
+      right: 3%;
+    }
+
+    .myChart4 {
+      position: absolute;
+      top: 45%;
+      right: 37%;
+    }
+
+    .myChart5 {
+      position: absolute;
+      top: 45%;
+      right: 20%;
+    }
+
+    .myChart6 {
+      position: absolute;
+      top: 45%;
+      right: 3%;
+    }
+
+    .myChart7 {
+      position: absolute;
+      top: 85%;
+      right: 37%;
+    }
+
+    .button {
+      position: fixed;
+      top: 0;
+      right: 0;
+      margin: 5px;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: none;
+      color: black;
+      background-color: #007bff;
+      cursor: pointer;
+    }
+    .button1 {
+      right=500px;
+      left=500px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="button">
+    <form method="post" style="display: inline-block;">
+      <button type="submit" name="action" value="elec" class="button1">전정대</button>
+    </form>
+    <form method="post" style="display: inline-block;">
+      <button type="submit" name="action" value="soft" class="button1">소융대</button>
+    </form>
+     <form method="post" style="display: inline-block;">
+      <button type="submit" name="action" value="nerd" class="button1">공과대</button>
+    </form>
+     <form method="post" style="display: inline-block;">
+      <button type="submit" name="action" value="math" class="button1">자연대</button>
+    </form>
+     <form method="post" style="display: inline-block;">
+      <button type="submit" name="action" value="inmun" class="button1">인문대</button>
+    </form>
+     <form method="post" style="display: inline-block;">
+      <button type="submit" name="action" value="law" class="button1">정법대</button>
+    </form>
+     <form method="post" style="display: inline-block;">
+      <button type="submit" name="action" value="coin" class="button1">경영대</button>
+    </form>
+     <form method="post" style="display: inline-block;">
+      <button type="submit" name="action" value="reset" class="button1">reset</button>
+    </form>
+  </div>
+
+  <div class="myChart" style="text-align: center;">
+  <h1>전체 참석률: {{ per }}%</h1>
+  <canvas id="myChart"></canvas>
+  </div>
+
+  <div class="myChart1" style="text-align: center;">
+  <h2>전정대 참석률: {{ per2 }}%</h2>
+  <canvas id="myChart1"></canvas>
+  </div>
+
+  <div class="myChart2" style="text-align: center;">
+  <h2>소융대 참석률: {{ per3 }}%</h2>
+  <canvas id="myChart2"></canvas>
+  </div>
+
+  <div class="myChart3" style="text-align: center;">
+  <h2>공과대 참석률: {{ per4 }}%</h2>
+  <canvas id="myChart3"></canvas>
+  </div>
+
+  <div class="myChart4" style="text-align: center;">
+  <h2>자연대 참석률: {{ per5 }}%</h2>
+  <canvas id="myChart4"></canvas>
+  </div>
+
+  <div class="myChart5" style="text-align: center;">
+  <h2>인문대 참석률: {{ per6 }}%</h2>
+  <canvas id="myChart5"></canvas>
+  </div>
+
+  <div class="myChart6" style="text-align: center;">
+  <h2>정법대 참석률: {{ per7 }}%</h2>
+  <canvas id="myChart6"></canvas>
+  </div>
+
+  <div class="myChart7" style="text-align: center;">
+  <h2>경영대 참석률: {{ per8 }}%</h2>
+  <canvas id="myChart7"></canvas>
+  </div>
+
+  <script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ['참석', '불참'],
+        datasets: [{
+          data: [{{ percentage['1'] }}, {{ percentage['2'] }}],
+          backgroundColor: [
+            'rgba(54, 162, 235, 0.7)',
+            'rgba(255, 99, 132, 0.7)'
+          ],
+          borderColor: [
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 99, 132, 1)'
+          ],
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: false
+          },
+        }
+      }
+    });
+
+    var ctx = document.getElementById('myChart1').getContext('2d');
+    var myChart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ['참석', '불참'],
+        datasets: [{
+          data: [{{ percentage2['1'] }}, {{ percentage2['2'] }}],
+          backgroundColor: [
+            'rgba(54, 162, 235, 0.7)',
+            'rgba(255, 99, 132, 0.7)'
+          ],
+          borderColor: [
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 99, 132, 1)'
+          ],
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: false,
+        plugins: {
+          legend: {
+            display: false
+          },
+        }
+      }
+    });
+
+    var ctx = document.getElementById('myChart2').getContext('2d');
+    var myChart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ['참석', '불참'],
+        datasets: [{
+          data: [{{ percentage3['1'] }}, {{ percentage3['2'] }}],
+          backgroundColor: [
+            'rgba(54, 162, 235, 0.7)',
+            'rgba(255, 99, 132, 0.7)'
+          ],
+          borderColor: [
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 99, 132, 1)'
+          ],
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: false,
+        plugins: {
+          legend: {
+            display: false
+          },
+        }
+      }
+    });
+
+    var ctx = document.getElementById('myChart3').getContext('2d');
+    var myChart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ['참석', '불참'],
+        datasets: [{
+          data: [{{ percentage4['1'] }}, {{ percentage4['2'] }}],
+          backgroundColor: [
+            'rgba(54, 162, 235, 0.7)',
+            'rgba(255, 99, 132, 0.7)'
+          ],
+          borderColor: [
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 99, 132, 1)'
+          ],
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: false,
+        plugins: {
+          legend: {
+            display: false
+          },
+        }
+      }
+    });
+
+    var ctx = document.getElementById('myChart4').getContext('2d');
+    var myChart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ['참석', '불참'],
+        datasets: [{
+          data: [{{ percentage5['1'] }}, {{ percentage5['2'] }}],
+          backgroundColor: [
+            'rgba(54, 162, 235, 0.7)',
+            'rgba(255, 99, 132, 0.7)'
+          ],
+          borderColor: [
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 99, 132, 1)'
+          ],
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: false,
+        plugins: {
+          legend: {
+            display: false
+          },
+        }
+      }
+    });
+
+    var ctx = document.getElementById('myChart5').getContext('2d');
+    var myChart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ['참석', '불참'],
+        datasets: [{
+          data: [{{ percentage6['1'] }}, {{ percentage6['2'] }}],
+          backgroundColor: [
+            'rgba(54, 162, 235, 0.7)',
+            'rgba(255, 99, 132, 0.7)'
+          ],
+          borderColor: [
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 99, 132, 1)'
+          ],
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: false,
+        plugins: {
+          legend: {
+            display: false
+          },
+        }
+      }
+    });
+
+    var ctx = document.getElementById('myChart6').getContext('2d');
+    var myChart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ['참석', '불참'],
+        datasets: [{
+          data: [{{ percentage7['1'] }}, {{ percentage7['2'] }}],
+          backgroundColor: [
+            'rgba(54, 162, 235, 0.7)',
+            'rgba(255, 99, 132, 0.7)'
+          ],
+          borderColor: [
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 99, 132, 1)'
+          ],
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: false,
+        plugins: {
+          legend: {
+            display: false
+          },
+        }
+      }
+    });
+
+    var ctx = document.getElementById('myChart7').getContext('2d');
+    var myChart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ['참석', '불참'],
+        datasets: [{
+          data: [{{ percentage8['1'] }}, {{ percentage8['2'] }}],
+          backgroundColor: [
+            'rgba(54, 162, 235, 0.7)',
+            'rgba(255, 99, 132, 0.7)'
+          ],
+          borderColor: [
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 99, 132, 1)'
+          ],
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: false,
+        plugins: {
+          legend: {
+            display: false
+          },
+        }
+      }
+    });
+  </script>
+</body>
+</html>
